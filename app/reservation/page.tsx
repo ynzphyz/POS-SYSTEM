@@ -7,14 +7,15 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Plus, Calendar, Users, Phone } from 'lucide-react'
-import { reservations } from '@/lib/mock-data'
+import { reservations as initialReservations } from '@/lib/mock-data'
 import { formatDate } from '@/lib/utils'
-import { Employee } from '@/lib/types'
+import { Employee, Reservation } from '@/lib/types'
 import { StatusBadge } from '@/components/shared/status-badge'
 
 export default function ReservationPage() {
   const router = useRouter()
   const [currentEmployee, setCurrentEmployee] = useState<Employee | null>(null)
+  const [reservations, setReservations] = useState<Reservation[]>(initialReservations)
 
   useEffect(() => {
     const empData = localStorage.getItem('currentEmployee')
@@ -24,6 +25,24 @@ export default function ReservationPage() {
     }
     setCurrentEmployee(JSON.parse(empData))
   }, [router])
+
+  const handleConfirm = (reservationId: string) => {
+    setReservations(prev => 
+      prev.map(res => 
+        res.id === reservationId 
+          ? { ...res, status: 'confirmed' as const }
+          : res
+      )
+    )
+  }
+
+  const handleEdit = (reservationId: string) => {
+    router.push(`/reservation/edit/${reservationId}`)
+  }
+
+  const handleDelete = (reservationId: string) => {
+    setReservations(prev => prev.filter(res => res.id !== reservationId))
+  }
 
   if (!currentEmployee) return null
 
@@ -78,10 +97,27 @@ export default function ReservationPage() {
                 </div>
 
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" className="flex-1 h-9">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1 h-9"
+                    onClick={() => handleEdit(reservation.id)}
+                  >
                     Edit
                   </Button>
-                  <Button size="sm" className="flex-1 h-9">
+                  <Button 
+                    variant="destructive"
+                    size="sm" 
+                    className="flex-1 h-9"
+                    onClick={() => handleDelete(reservation.id)}
+                  >
+                    Delete
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    className="flex-1 h-9"
+                    onClick={() => handleConfirm(reservation.id)}
+                  >
                     Confirm
                   </Button>
                 </div>

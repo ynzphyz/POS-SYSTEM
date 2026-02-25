@@ -1,8 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { Bell, Cloud, Home, ShoppingCart, Utensils, Calendar, ChefHat, History, BarChart3, Package, Clock, Tag, Users, Settings } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
+import { Bell, Cloud, Home, ShoppingCart, Utensils, Calendar, ChefHat, History, BarChart3, Package, Clock, Tag, Users, Settings, LogOut, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ROLE_PERMISSIONS } from '@/lib/constants'
 import { Role } from '@/lib/types'
@@ -30,9 +31,16 @@ interface NavbarProps {
 
 export function Navbar({ employeeName = 'Richardo', employeeRole = 'cashier', employeeAvatar }: NavbarProps) {
   const pathname = usePathname()
+  const router = useRouter()
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false)
   const allowedPages = ROLE_PERMISSIONS[employeeRole] || []
 
   const filteredMenuItems = menuItems.filter(item => allowedPages.includes(item.key))
+
+  const handleLogout = () => {
+    localStorage.removeItem('currentEmployee')
+    router.push('/login')
+  }
 
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
@@ -75,14 +83,52 @@ export function Navbar({ employeeName = 'Richardo', employeeRole = 'cashier', em
               <span className="absolute top-1.5 right-1.5 h-2 w-2 bg-red-500 rounded-full ring-2 ring-white"></span>
             </button>
             
-            <div className="flex items-center space-x-3 pl-4 border-l border-gray-200">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold text-sm shadow-lg">
-                {employeeName.split(' ').map(n => n[0]).join('')}
-              </div>
-              <div className="hidden sm:block">
-                <p className="text-sm font-semibold text-gray-900">{employeeName}</p>
-                <p className="text-xs text-gray-500 capitalize">{employeeRole}</p>
-              </div>
+            <div className="relative">
+              <button
+                onClick={() => setShowProfileDropdown(!showProfileDropdown)}
+                className="flex items-center space-x-3 pl-4 border-l border-gray-200 hover:bg-gray-50 rounded-xl pr-3 py-2 transition-all"
+              >
+                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold text-sm shadow-lg">
+                  {employeeName.split(' ').map(n => n[0]).join('')}
+                </div>
+                <div className="hidden sm:block text-left">
+                  <p className="text-sm font-semibold text-gray-900">{employeeName}</p>
+                  <p className="text-xs text-gray-500 capitalize">{employeeRole}</p>
+                </div>
+                <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform ${showProfileDropdown ? 'rotate-180' : ''}`} />
+              </button>
+
+              {showProfileDropdown && (
+                <>
+                  <div 
+                    className="fixed inset-0 z-10" 
+                    onClick={() => setShowProfileDropdown(false)}
+                  />
+                  <div className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg z-20 overflow-hidden">
+                    <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 border-b border-gray-200">
+                      <div className="flex items-center space-x-3">
+                        <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold shadow-lg">
+                          {employeeName.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-gray-900">{employeeName}</p>
+                          <p className="text-xs text-gray-600 capitalize">{employeeRole}</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="p-2">
+                      <button
+                        onClick={handleLogout}
+                        className="w-full flex items-center space-x-3 px-4 py-3 text-left text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                      >
+                        <LogOut className="h-4 w-4" />
+                        <span className="text-sm font-medium">Logout</span>
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

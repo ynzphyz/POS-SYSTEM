@@ -7,13 +7,14 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Plus } from 'lucide-react'
-import { discounts } from '@/lib/mock-data'
+import { discounts as initialDiscounts } from '@/lib/mock-data'
 import { formatDate } from '@/lib/utils'
-import { Employee } from '@/lib/types'
+import { Employee, Discount } from '@/lib/types'
 
 export default function DiscountPage() {
   const router = useRouter()
   const [currentEmployee, setCurrentEmployee] = useState<Employee | null>(null)
+  const [discounts, setDiscounts] = useState<Discount[]>(initialDiscounts)
 
   useEffect(() => {
     const empData = localStorage.getItem('currentEmployee')
@@ -23,6 +24,14 @@ export default function DiscountPage() {
     }
     setCurrentEmployee(JSON.parse(empData))
   }, [router])
+
+  const handleEdit = (discountId: string) => {
+    router.push(`/discount/edit/${discountId}`)
+  }
+
+  const handleDelete = (discountId: string) => {
+    setDiscounts(prev => prev.filter(d => d.id !== discountId))
+  }
 
   if (!currentEmployee) return null
 
@@ -76,8 +85,22 @@ export default function DiscountPage() {
                 </div>
 
                 <div className="flex space-x-2 mt-4">
-                  <Button variant="outline" size="sm" className="flex-1">Edit</Button>
-                  <Button variant="destructive" size="sm" className="flex-1">Delete</Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => handleEdit(discount.id)}
+                  >
+                    Edit
+                  </Button>
+                  <Button 
+                    variant="destructive" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => handleDelete(discount.id)}
+                  >
+                    Delete
+                  </Button>
                 </div>
               </CardContent>
             </Card>
