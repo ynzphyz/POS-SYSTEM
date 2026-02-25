@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ArrowLeft, Upload, ChevronDown } from 'lucide-react'
 import { employees } from '@/lib/mock-data'
-import { Employee } from '@/lib/types'
+import { Employee, Role } from '@/lib/types'
 
 export default function EditUserPage() {
   const router = useRouter()
@@ -19,7 +19,7 @@ export default function EditUserPage() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [role, setRole] = useState<'admin' | 'cashier' | 'waiter' | 'chef'>('cashier')
+  const [role, setRole] = useState<Role>('cashier')
   const [pin, setPin] = useState('')
   const [status, setStatus] = useState<'active' | 'inactive'>('active')
   const [profileImage, setProfileImage] = useState<string | null>(null)
@@ -155,7 +155,7 @@ export default function EditUserPage() {
                     </button>
                     {showRoleDropdown && (
                       <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg">
-                        {(['admin', 'cashier', 'waiter', 'chef'] as const).map((r) => (
+                        {(['admin', 'manager', 'cashier', 'waiter', 'kitchen'] as const).map((r) => (
                           <div
                             key={r}
                             className={`px-3 py-2 hover:bg-blue-50 cursor-pointer transition-colors capitalize ${

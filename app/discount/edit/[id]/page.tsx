@@ -18,7 +18,7 @@ export default function EditDiscountPage() {
   const [currentEmployee, setCurrentEmployee] = useState<Employee | null>(null)
   const [name, setName] = useState('')
   const [code, setCode] = useState('')
-  const [type, setType] = useState<'percentage' | 'fixed'>('percentage')
+  const [type, setType] = useState<'percentage' | 'nominal'>('percentage')
   const [value, setValue] = useState('')
   const [validFrom, setValidFrom] = useState('')
   const [validTo, setValidTo] = useState('')
@@ -39,12 +39,12 @@ export default function EditDiscountPage() {
     const discount = discounts.find(d => d.id === discountId)
     if (discount) {
       setName(discount.name)
-      setCode(discount.code)
+      setCode(discount.code || '')
       setType(discount.type)
       setValue(discount.value.toString())
       setValidFrom(new Date(discount.validFrom).toISOString().split('T')[0])
       setValidTo(new Date(discount.validTo).toISOString().split('T')[0])
-      setUsageLimit(discount.usageLimit?.toString() || '')
+      setUsageLimit(discount.usageLimit ? discount.usageLimit.toString() : '')
       setStatus(discount.status)
     }
   }, [router, discountId])
@@ -123,10 +123,10 @@ export default function EditDiscountPage() {
                         </div>
                         <div
                           className={`px-3 py-2 hover:bg-blue-50 cursor-pointer transition-colors ${
-                            type === 'fixed' ? 'bg-blue-100 text-blue-900' : 'text-gray-700'
+                            type === 'nominal' ? 'bg-blue-100 text-blue-900' : 'text-gray-700'
                           }`}
                           onClick={() => {
-                            setType('fixed')
+                            setType('nominal')
                             setShowTypeDropdown(false)
                           }}
                         >
