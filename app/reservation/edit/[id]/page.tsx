@@ -19,7 +19,6 @@ export default function EditReservationPage() {
   const [currentEmployee, setCurrentEmployee] = useState<Employee | null>(null)
   const [customerName, setCustomerName] = useState('')
   const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [partySize, setPartySize] = useState('')
@@ -40,7 +39,6 @@ export default function EditReservationPage() {
     if (reservation) {
       setCustomerName(reservation.customerName)
       setPhone(reservation.phone)
-      setEmail(reservation.email || '')
       setDate(new Date(reservation.date).toISOString().split('T')[0])
       setTime(reservation.time)
       setPartySize(reservation.partySize.toString())
@@ -96,16 +94,6 @@ export default function EditReservationPage() {
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="Enter phone number"
                     required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Email (Optional)</label>
-                  <Input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter email address"
                   />
                 </div>
 
