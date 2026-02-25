@@ -35,7 +35,7 @@ export default function UsersPage() {
   }
 
   const handleResetPIN = (employeeId: string) => {
-    const defaultPIN = '1234'
+    const defaultPIN = '123456'
     setEmployees(prev => 
       prev.map(emp => 
         emp.id === employeeId 
