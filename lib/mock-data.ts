@@ -658,7 +658,7 @@ export const transactions: Transaction[] = Array.from({ length: 30 }, (_, i) => 
   cashierName: employees[Math.floor(Math.random() * 3) + 4].name,
   customerName: ['John', 'Emma', 'Robert', 'Maria', 'David'][Math.floor(Math.random() * 5)],
   tableNumber: i % 3 === 0 ? undefined : `A${(i % 6) + 1}`,
-  orderType: i % 3 === 0 ? 'take-away' : 'dine-in',
+  orderType: (i % 3 === 0 ? 'take-away' : 'dine-in') as 'take-away' | 'dine-in',
   itemsCount: Math.floor(Math.random() * 5) + 2,
   subtotal: Math.floor(Math.random() * 200) + 50,
   discount: Math.floor(Math.random() * 20),
@@ -666,7 +666,7 @@ export const transactions: Transaction[] = Array.from({ length: 30 }, (_, i) => 
   serviceCharge: 0,
   total: 0,
   paymentMethod: ['cash', 'qris', 'debit', 'transfer'][Math.floor(Math.random() * 4)] as any,
-  status: 'completed',
+  status: 'completed' as 'completed',
 })).map(t => ({
   ...t,
   tax: t.subtotal * 0.11,
