@@ -31,7 +31,6 @@ export default function AddReservationPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    alert('Reservation created successfully! (This is a demo)')
     router.push('/reservation')
   }
 

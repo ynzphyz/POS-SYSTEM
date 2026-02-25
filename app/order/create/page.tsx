@@ -87,14 +87,11 @@ export default function CreateOrderPage() {
 
   const handlePlaceOrder = () => {
     if (!customerName || orderItems.length === 0) {
-      alert('Please enter customer name and add items')
       return
     }
     if (orderType === 'dine-in' && !selectedTable) {
-      alert('Please select a table')
       return
     }
-    alert('Order placed successfully!')
     router.push('/order')
   }
 

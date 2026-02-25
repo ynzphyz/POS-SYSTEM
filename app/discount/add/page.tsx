@@ -42,7 +42,6 @@ export default function AddDiscountPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    alert('Promo/Discount created successfully! (This is a demo)')
     router.push('/discount')
   }
 

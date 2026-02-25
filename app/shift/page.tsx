@@ -34,18 +34,16 @@ export default function ShiftPage() {
 
   const handleOpenShift = () => {
     if (!openingCash || Number(openingCash) <= 0) {
-      alert('Please enter valid opening cash amount')
       return
     }
-    alert('Shift opened successfully!')
+    router.push('/')
   }
 
   const handleCloseShift = () => {
     if (!closingCash || Number(closingCash) <= 0) {
-      alert('Please enter valid closing cash amount')
       return
     }
-    alert('Shift closed successfully!')
+    router.push('/')
   }
 
   return (
