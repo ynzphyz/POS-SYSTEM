@@ -36,7 +36,6 @@ export default function AddTablePage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    alert('Table added successfully! (This is a demo)')
     router.push('/table')
   }
 

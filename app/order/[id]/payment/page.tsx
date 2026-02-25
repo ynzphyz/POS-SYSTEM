@@ -49,14 +49,11 @@ export default function PaymentPage() {
 
   const handleConfirmPayment = () => {
     if (paymentMethod === 'cash' && (!cashReceived || Number(cashReceived) < order.total)) {
-      alert('Cash received must be greater than or equal to total')
       return
     }
     if ((paymentMethod === 'debit' || paymentMethod === 'transfer') && !reference) {
-      alert('Please enter reference number')
       return
     }
-    alert('Payment confirmed successfully!')
     router.push('/order')
   }
 

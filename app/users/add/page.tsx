@@ -56,7 +56,6 @@ export default function AddUserPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    alert('User added successfully! (This is a demo)')
     router.push('/users')
   }
 

@@ -62,7 +62,6 @@ export default function AddInventoryItemPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    alert('Item added successfully! (This is a demo)')
     router.push('/inventory')
   }
 
