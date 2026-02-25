@@ -37,7 +37,7 @@ export default function UsersPage() {
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
-          <Button>
+          <Button onClick={() => router.push('/users/add')}>
             <Plus className="h-4 w-4 mr-2" />
             Add User
           </Button>

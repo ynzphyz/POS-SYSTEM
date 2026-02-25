@@ -362,8 +362,8 @@ export const orders: Order[] = [
     total: 417.60,
     status: 'in-progress',
     progress: 10,
-    createdAt: new Date('2024-02-17T15:43:00'),
-    updatedAt: new Date('2024-02-17T15:43:00'),
+    createdAt: new Date(Date.now() - 15 * 60 * 1000), // 15 minutes ago
+    updatedAt: new Date(Date.now() - 15 * 60 * 1000),
     cashierId: 'emp5',
   },
   {
@@ -384,8 +384,8 @@ export const orders: Order[] = [
     total: 385.12,
     status: 'in-progress',
     progress: 60,
-    createdAt: new Date('2024-02-17T14:56:00'),
-    updatedAt: new Date('2024-02-17T14:56:00'),
+    createdAt: new Date(Date.now() - 8 * 60 * 1000), // 8 minutes ago
+    updatedAt: new Date(Date.now() - 8 * 60 * 1000),
     cashierId: 'emp5',
   },
   {
@@ -408,8 +408,8 @@ export const orders: Order[] = [
     total: 385.12,
     status: 'in-progress',
     progress: 40,
-    createdAt: new Date('2024-02-17T13:24:00'),
-    updatedAt: new Date('2024-02-17T13:24:00'),
+    createdAt: new Date(Date.now() - 25 * 60 * 1000), // 25 minutes ago
+    updatedAt: new Date(Date.now() - 25 * 60 * 1000),
     cashierId: 'emp5',
   },
   {
@@ -432,8 +432,8 @@ export const orders: Order[] = [
     total: 385.12,
     status: 'waiting-payment',
     progress: 100,
-    createdAt: new Date('2024-02-17T12:24:00'),
-    updatedAt: new Date('2024-02-17T12:24:00'),
+    createdAt: new Date(Date.now() - 45 * 60 * 1000), // 45 minutes ago
+    updatedAt: new Date(Date.now() - 45 * 60 * 1000),
     cashierId: 'emp5',
   },
   {
@@ -454,8 +454,8 @@ export const orders: Order[] = [
     total: 208.80,
     status: 'in-progress',
     progress: 50,
-    createdAt: new Date('2024-02-17T11:24:00'),
-    updatedAt: new Date('2024-02-17T11:24:00'),
+    createdAt: new Date(Date.now() - 12 * 60 * 1000), // 12 minutes ago
+    updatedAt: new Date(Date.now() - 12 * 60 * 1000),
     cashierId: 'emp6',
   },
   {
@@ -477,8 +477,8 @@ export const orders: Order[] = [
     total: 87.00,
     status: 'waiting-payment',
     progress: 100,
-    createdAt: new Date('2024-02-17T10:11:00'),
-    updatedAt: new Date('2024-02-17T10:11:00'),
+    createdAt: new Date(Date.now() - 30 * 60 * 1000), // 30 minutes ago
+    updatedAt: new Date(Date.now() - 30 * 60 * 1000),
     cashierId: 'emp5',
   },
 ]
