@@ -7,13 +7,14 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Plus } from 'lucide-react'
-import { employees } from '@/lib/mock-data'
+import { employees as initialEmployees } from '@/lib/mock-data'
 import { formatDate } from '@/lib/utils'
 import { Employee } from '@/lib/types'
 
 export default function UsersPage() {
   const router = useRouter()
   const [currentEmployee, setCurrentEmployee] = useState<Employee | null>(null)
+  const [employees, setEmployees] = useState<Employee[]>(initialEmployees)
 
   useEffect(() => {
     const empData = localStorage.getItem('currentEmployee')
@@ -28,6 +29,21 @@ export default function UsersPage() {
     }
     setCurrentEmployee(emp)
   }, [router])
+
+  const handleEdit = (employeeId: string) => {
+    router.push(`/users/edit/${employeeId}`)
+  }
+
+  const handleResetPIN = (employeeId: string) => {
+    const defaultPIN = '1234'
+    setEmployees(prev => 
+      prev.map(emp => 
+        emp.id === employeeId 
+          ? { ...emp, pin: defaultPIN }
+          : emp
+      )
+    )
+  }
 
   if (!currentEmployee) return null
 
@@ -85,8 +101,20 @@ export default function UsersPage() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex space-x-2">
-                          <Button variant="outline" size="sm">Edit</Button>
-                          <Button variant="outline" size="sm">Reset PIN</Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => handleEdit(emp.id)}
+                          >
+                            Edit
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => handleResetPIN(emp.id)}
+                          >
+                            Reset PIN
+                          </Button>
                         </div>
                       </td>
                     </tr>
