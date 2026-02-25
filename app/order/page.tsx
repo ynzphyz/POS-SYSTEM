@@ -134,7 +134,7 @@ export default function OrderPage() {
                       <h3 className="font-semibold text-lg text-gray-900">{order.orderNumber}</h3>
                       <p className="text-sm text-gray-500">{order.customerName}</p>
                     </div>
-                    <StatusBadge status={order.status} />
+                    <StatusBadge status={order.status} type="order" />
                   </div>
 
                   <div className="space-y-2 mb-3">
