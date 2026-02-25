@@ -175,13 +175,13 @@ export default function EditUserPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">PIN (4 digits)</label>
+                  <label className="text-sm font-medium text-gray-700">PIN (6 digits)</label>
                   <Input
                     type="password"
                     value={pin}
-                    onChange={(e) => setPin(e.target.value.slice(0, 4))}
-                    placeholder="Enter 4-digit PIN"
-                    maxLength={4}
+                    onChange={(e) => setPin(e.target.value.slice(0, 6))}
+                    placeholder="Enter 6-digit PIN"
+                    maxLength={6}
                     required
                   />
                 </div>
