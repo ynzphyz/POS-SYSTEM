@@ -32,7 +32,7 @@ export default function DiscountPage() {
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Discounts & Promos</h1>
-          <Button>
+          <Button onClick={() => router.push('/discount/add')}>
             <Plus className="h-4 w-4 mr-2" />
             Add Promo
           </Button>

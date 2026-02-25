@@ -58,7 +58,7 @@ export default function TablePage() {
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Table Management</h1>
           {currentEmployee.role === 'admin' && (
-            <Button>
+            <Button onClick={() => router.push('/table/add')}>
               <Plus className="h-4 w-4 mr-2" />
               Add Table
             </Button>

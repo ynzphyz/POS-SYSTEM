@@ -34,7 +34,7 @@ export default function ReservationPage() {
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Reservations</h1>
-          <Button>
+          <Button onClick={() => router.push('/reservation/add')}>
             <Plus className="h-4 w-4 mr-2" />
             New Reservation
           </Button>
@@ -69,17 +69,19 @@ export default function ReservationPage() {
                   )}
                 </div>
 
-                {reservation.notes && (
-                  <p className="text-xs text-gray-500 mb-3 p-2 bg-gray-50 rounded">
-                    {reservation.notes}
-                  </p>
-                )}
+                <div className="mb-3 min-h-[40px]">
+                  {reservation.notes && (
+                    <p className="text-xs text-gray-500 p-2 bg-gray-50 rounded">
+                      {reservation.notes}
+                    </p>
+                  )}
+                </div>
 
-                <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" className="flex-1">
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" className="flex-1 h-9">
                     Edit
                   </Button>
-                  <Button size="sm" className="flex-1">
+                  <Button size="sm" className="flex-1 h-9">
                     Confirm
                   </Button>
                 </div>
